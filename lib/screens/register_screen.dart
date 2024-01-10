@@ -13,6 +13,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailOrPhoneNumberController =
       TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordConfirmationController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Text("Masukkan Email atau Nomor HP",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    Spacer(flex: 1),
                     FlexibleTextFormField(
                       controller: emailOrPhoneNumberController,
                       labelText: 'example@email.com',
@@ -60,7 +61,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Text("Password",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    Spacer(flex: 1),
                     FlexibleTextFormField(
                       controller: passwordController,
                       labelText: 'Password',
@@ -73,9 +73,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Text("Konfirmasi Password",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    Spacer(flex: 1),
                     FlexibleTextFormField(
-                      controller: passwordController,
+                      controller: passwordConfirmationController,
                       labelText: 'Konfirmasi Password',
                       width: screenWidth * 0.8,
                       obscureText: true,
@@ -86,9 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         width: screenWidth * 0.8,
                         onPressed: null),
-                    Spacer(flex: 1),
                     Text("Atau daftar dengan"),
-                    Spacer(flex: 1),
                     FlexibleElevatedButton(
                         widget: Row(children: [
                           Spacer(flex: 10),
@@ -99,7 +96,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ]),
                         width: screenWidth * 0.8,
                         onPressed: null),
-                    Spacer(flex: 1),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -157,7 +153,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
-          contentPadding: EdgeInsets.symmetric(horizontal: width),
         ),
         obscureText: obscureText,
       ),
