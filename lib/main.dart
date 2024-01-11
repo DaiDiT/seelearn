@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'screens/landing_screen.dart';
+import 'navigation_menu.dart';
 
 void main() {
-  runApp(SeeLearnApp());
+  runApp(const MyApp());
 }
 
-class SeeLearnApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: "Landing Screen",
-      home: LandingScreen(),
+      home: NavigationMenu(),
       debugShowCheckedModeBanner: false,
     );
   }
