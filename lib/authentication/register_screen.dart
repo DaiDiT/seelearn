@@ -10,8 +10,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController emailOrPhoneNumberController =
-      TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController passwordConfirmationController =
       TextEditingController();
@@ -19,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    bool isEqual = false;
 
     return MaterialApp(
       home: Scaffold(
@@ -47,12 +47,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Spacer(flex: 3),
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("Masukkan Email atau Nomor HP",
+                      child: Text("Masukkan Email",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    FlexibleTextFormField(
-                      controller: emailOrPhoneNumberController,
-                      labelText: 'example@email.com',
+                    buildFlexibleTextField(
+                      controller: emailController,
+                      hintText: 'example@email.com',
                       width: screenWidth * 0.8,
                     ),
                     Spacer(flex: 1),
@@ -61,25 +61,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Text("Password",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    FlexibleTextFormField(
-                      controller: passwordController,
-                      labelText: 'Password',
-                      width: screenWidth * 0.8,
-                      obscureText: true,
-                    ),
+                    buildFlexibleTextField(
+                        controller: passwordController,
+                        hintText: 'Password',
+                        width: screenWidth * 0.8,
+                        obscureText: true,
+                        onChanged: (value) {
+                          setState(() {});
+                        }),
                     Spacer(flex: 1),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text("Konfirmasi Password",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    FlexibleTextFormField(
+                    buildFlexibleTextField(
                       controller: passwordConfirmationController,
-                      labelText: 'Konfirmasi Password',
+                      hintText: 'Konfirmasi Password',
                       width: screenWidth * 0.8,
                       obscureText: true,
+                      onChanged: (value) {
+                        setState(() {
+                          isEqual = passwordController.value == value;
+                        });
+                      },
                     ),
-                    Spacer(flex: 2),
+                    Text((isEqual) ? "" : "Kata sandi tidak serupa"),
+                    Spacer(flex: 1),
                     FlexibleElevatedButton(
                         widget: Text("DAFTAR",
                             style: TextStyle(fontWeight: FontWeight.bold)),
@@ -141,19 +149,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ));
   }
 
-  Widget FlexibleTextFormField({
+  Widget buildFlexibleTextField({
     required TextEditingController controller,
     required double width,
     bool obscureText = false,
-    required String labelText,
+    required String hintText,
+    void Function(String)? onChanged = null,
   }) {
     return Flexible(
       flex: 3,
-      child: TextFormField(
+      child: TextField(
+        onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
-          labelText: labelText,
-        ),
+            hintText: hintText,
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
         obscureText: obscureText,
       ),
     );

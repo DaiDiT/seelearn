@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/download_screen.dart';
@@ -32,17 +31,25 @@ class _NavigationMenuState extends State<NavigationMenu> {
         selectedIndex: currentPageIndex,
         destinations: const [
           NavigationDestination(
-              icon: Icon(Icons.home_rounded), label: 'Beranda'),
+              icon: Icon(Icons.home_rounded, color: Colors.white),
+              label: 'Beranda',
+              selectedIcon: Icon(Icons.home_rounded)),
           NavigationDestination(
-              icon: Icon(Icons.download_rounded), label: 'Unduhan'),
+              icon: Icon(Icons.download_rounded, color: Colors.white),
+              label: 'Unduhan',
+              selectedIcon: Icon(Icons.download_rounded)),
           NavigationDestination(
-              icon: Icon(Icons.search_rounded), label: 'Cari'),
+              icon: Icon(Icons.search_rounded, color: Colors.white),
+              label: 'Cari',
+              selectedIcon: Icon(Icons.search_rounded)),
           NavigationDestination(
-              icon: Icon(Icons.bookmark_rounded), label: 'Markah'),
+              icon: Icon(Icons.bookmark_rounded, color: Colors.white),
+              label: 'Markah',
+              selectedIcon: Icon(Icons.bookmark_outline_rounded)),
           NavigationDestination(
-            icon: Icon(CupertinoIcons.person_fill, color: Colors.white),
+            icon: Icon(Icons.person_rounded, color: Colors.white),
             label: 'Profil',
-            selectedIcon: Icon(CupertinoIcons.person),
+            selectedIcon: Icon(Icons.person_outline_rounded),
           ),
         ],
       ),
