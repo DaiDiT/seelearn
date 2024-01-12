@@ -10,6 +10,6 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Text("Di sini tempat profil");
+    return const Text("Di sini tempat profil");
   }
 }

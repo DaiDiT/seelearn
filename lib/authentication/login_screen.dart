@@ -1,7 +1,7 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'register_screen.dart';
-import 'home_screen.dart';
+import 'package:seelearn/navigation_menu.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,8 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController emailOrPhoneNumberController =
-      TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -51,12 +50,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Masukkan Email atau Nomor HP",
+                    "Masukkan Email",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 FlexibleTextFormField(
-                  controller: emailOrPhoneNumberController,
+                  controller: emailController,
                   labelText: 'example@email.com',
                   width: screenWidth * 0.8,
                 ),
@@ -64,13 +63,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Password",
+                    "Kata sandi",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 FlexibleTextFormField(
                   controller: passwordController,
-                  labelText: 'Password',
+                  labelText: 'Kata sandi',
                   width: screenWidth * 0.8,
                   obscureText: true,
                 ),
@@ -88,11 +87,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   width: screenWidth * 0.8,
                   onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                      (route) => false,
-                    );
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NavigationMenu()));
                   },
                 ),
                 Text("Atau daftar dengan"),
