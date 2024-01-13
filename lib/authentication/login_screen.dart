@@ -52,19 +52,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Image(
                     height: 128,
                     width: 128,
-                    image: AssetImage('lib/assets/images/seelearn_logo.jpg'),
+                    image: AssetImage('lib/assets/images/seelearn_logo.png'),
                   ),
                   const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Email",
-                      style: TextStyle(fontWeight: FontWeight.bold, height: 3),
-                    ),
-                  ),
+                      alignment: Alignment.centerLeft,
+                      child: SizedBox(
+                        height: 14,
+                        child: Text(
+                          'Email',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        ),
+                      )),
                   Container(
+                    height: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(.4),
+                      color: Color(0xFFD9D9D9),
                     ),
                     child: TextFormField(
                       validator: (value) {
@@ -75,10 +84,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       controller: emailController,
                       maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
                       decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Masukkan Email",
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15)),
+                        border: InputBorder.none,
+                        hintText: "Masukkan Email",
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      ),
                     ),
                   ),
                   const Align(
@@ -89,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Container(
+                    height: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.grey.withOpacity(.4),
@@ -102,12 +120,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       controller: passwordController,
                       maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
                       obscureText: !isVisible,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Masukkan Kata Sandi",
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10),
+                            horizontal: 15, vertical: 15),
                         suffixIcon: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: IconButton(

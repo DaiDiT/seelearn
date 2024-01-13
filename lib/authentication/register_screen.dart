@@ -56,7 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const Image(
                     height: 128,
                     width: 128,
-                    image: AssetImage('lib/assets/images/seelearn_logo.jpg'),
+                    image: AssetImage('lib/assets/images/seelearn_logo.png'),
                   ),
                   const Align(
                     alignment: Alignment.centerLeft,
