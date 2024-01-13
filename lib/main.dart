@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: "Landing Screen",
-      home: LoginScreen(),
+      home: RegisterScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

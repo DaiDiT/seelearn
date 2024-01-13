@@ -1,6 +1,10 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'package:seelearn/navigation_menu.dart';
+import 'package:seelearn/database/sqlite.dart';
+import 'package:seelearn/models/user.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -11,7 +15,6 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController gradeController = TextEditingController();
   final TextEditingController schoolOriginController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -33,7 +36,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           title: const Text("Daftar"),
           titleSpacing: 0,
           titleTextStyle: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+              fontSize: 20,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w700,
+              color: Colors.black),
           centerTitle: false,
           elevation: 0,
           leading: IconButton(
@@ -46,29 +52,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+        body: Center(
+          child: Container(
+            color: Colors.white,
             child: Form(
               key: formKey,
-              child: Column(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 children: [
                   const Image(
                     height: 128,
                     width: 128,
                     image: AssetImage('lib/assets/images/seelearn_logo.png'),
                   ),
+                  const SizedBox(height: 10),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Nama",
-                      style: TextStyle(fontWeight: FontWeight.bold, height: 3),
+                      'Nama',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        height: 2,
+                      ),
                     ),
                   ),
                   Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(.4),
+                      color: const Color(0xFFD9D9D9),
                     ),
                     child: TextFormField(
                       validator: (value) {
@@ -79,77 +95,84 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       controller: nameController,
                       maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        height: 2,
+                      ),
                       decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Masukkan Nama",
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15)),
+                        border: InputBorder.none,
+                        hintText: "Masukkan Nama",
+                        icon: Icon(Icons.person_rounded, color: Colors.grey),
+                      ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Kelas",
-                      style: TextStyle(fontWeight: FontWeight.bold, height: 3),
+                      'Asal Sekolah',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        height: 2,
+                      ),
                     ),
                   ),
                   Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(.4),
+                      color: const Color(0xFFD9D9D9),
                     ),
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Masukkan kelas anda";
-                        }
-                        return null;
-                      },
-                      controller: gradeController,
-                      maxLines: 1,
-                      decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Masukkan Kelas",
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15)),
-                    ),
-                  ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Sekolah",
-                      style: TextStyle(fontWeight: FontWeight.bold, height: 3),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(.4),
-                    ),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Masukkan sekolah anda";
+                          return "Masukkan asal sekolah anda";
                         }
                         return null;
                       },
                       controller: schoolOriginController,
                       maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        height: 2,
+                      ),
                       decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Masukkan Sekolah",
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15)),
+                        border: InputBorder.none,
+                        hintText: "Masukkan Asal Sekolah",
+                        icon: Icon(Icons.school_rounded, color: Colors.grey),
+                      ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Email",
-                      style: TextStyle(fontWeight: FontWeight.bold, height: 3),
+                      'Email',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        height: 2,
+                      ),
                     ),
                   ),
                   Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(.4),
+                      color: const Color(0xFFD9D9D9),
                     ),
                     child: TextFormField(
                       validator: (value) {
@@ -160,23 +183,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       controller: emailController,
                       maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        height: 2,
+                      ),
                       decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Masukkan Email",
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15)),
+                        border: InputBorder.none,
+                        hintText: "Masukkan Email",
+                        icon: Icon(Icons.email_rounded, color: Colors.grey),
+                      ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                   const Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.bottomLeft,
                     child: Text(
-                      "Kata Sandi",
-                      style: TextStyle(fontWeight: FontWeight.bold, height: 3),
+                      'Kata Sandi',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        height: 2,
+                      ),
                     ),
                   ),
                   Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(.4),
+                      color: const Color(0xFFD9D9D9),
                     ),
                     child: TextFormField(
                       validator: (value) {
@@ -187,90 +227,126 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       controller: passwordController,
                       maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        height: 2,
+                      ),
                       obscureText: !isVisible,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Masukkan Kata Sandi",
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10),
-                        suffixIcon: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isVisible = !isVisible;
-                                  });
-                                },
-                                icon: Icon((!isVisible)
-                                    ? Icons.visibility_off
-                                    : Icons.visibility))),
+                        icon: const Icon(Icons.lock, color: Colors.grey),
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isVisible = !isVisible;
+                              });
+                            },
+                            icon: Icon((!isVisible)
+                                ? Icons.visibility_off
+                                : Icons.visibility)),
+                        suffixIconColor: Colors.grey,
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                   const Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.bottomLeft,
                     child: Text(
-                      "Konfirmasi Kata Sandi",
-                      style: TextStyle(fontWeight: FontWeight.bold, height: 3),
+                      'Konfirmasi Kata Sandi',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700,
+                        height: 2,
+                      ),
                     ),
                   ),
                   Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.withOpacity(.4),
+                      color: const Color(0xFFD9D9D9),
                     ),
                     child: TextFormField(
                       validator: (value) {
-                        if (value! != passwordController.value) {
-                          return "Kata sandi tidak sama";
+                        if (value!.isEmpty) {
+                          return "Masukkan ulang kata sandi anda";
+                        } else if (passwordController.text !=
+                            passwordConfirmationController.text) {
+                          return "Kata sandi tidak cocok";
                         }
                         return null;
                       },
+                      controller: passwordConfirmationController,
                       maxLines: 1,
-                      obscureText: !isVisible,
-                      decoration: InputDecoration(
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                        height: 2,
+                      ),
+                      obscureText: true,
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Masukkan Ulang Kata Sandi",
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10),
-                        suffixIcon: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isVisible = !isVisible;
-                                  });
-                                },
-                                icon: Icon((!isVisible)
-                                    ? Icons.visibility_off
-                                    : Icons.visibility))),
+                        icon: Icon(Icons.lock, color: Colors.grey),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 36),
                   Container(
                     height: 50,
                     width: screenWidth,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Colors.yellow,
+                      color: const Color(0xFFFFD700),
                     ),
                     child: TextButton(
                         onPressed: () {
-                          if (formKey.currentState!.validate()) {}
+                          if (formKey.currentState!.validate()) {
+                            final db = DatabaseHelper();
+                            db
+                                .register(User(
+                                    name: nameController.text,
+                                    school: schoolOriginController.text,
+                                    email: emailController.text,
+                                    password: sha256
+                                        .convert(utf8
+                                            .encode(passwordController.text))
+                                        .toString()))
+                                .whenComplete(() => Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const NavigationMenu())));
+                          }
                         },
                         child: const Text(
                           "DAFTAR",
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                          ),
                         )),
                   ),
                   const Align(
                     alignment: Alignment.center,
                     child: Text(
                       "Atau daftar dengan",
-                      style: TextStyle(height: 3),
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 12,
+                          color: Colors.black,
+                          height: 3),
                     ),
                   ),
                   Container(
@@ -278,14 +354,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: screenWidth,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
-                      color: Colors.grey,
+                      color: const Color(0xFFD9D9D9),
                     ),
                     child: TextButton(
                       onPressed: () {},
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          FaIcon(FontAwesomeIcons.google),
+                          Image(
+                            height: 24,
+                            width: 24,
+                            image:
+                                AssetImage('lib/assets/images/google_logo.png'),
+                          ),
                           SizedBox(
                             width: 5,
                           ),
@@ -300,9 +381,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Sudah punya akun?"),
-                      TextButton(
-                        onPressed: () {
+                      const Text("Sudah punya akun?",
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 12,
+                              color: Colors.black,
+                              height: 3)),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -311,7 +400,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         child: const Text("Masuk",
                             style: TextStyle(
-                                fontWeight: FontWeight.w500, height: 3)),
+                                fontFamily: 'Roboto',
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                                height: 3)),
                       ),
                     ],
                   ),
