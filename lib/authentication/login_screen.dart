@@ -14,6 +14,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  bool isVisible = false;
+
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -21,154 +25,206 @@ class _LoginScreenState extends State<LoginScreen> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Masuk"),
+          backgroundColor: Colors.white,
+          title: const Text("Masuk"),
+          titleSpacing: 0,
+          titleTextStyle: const TextStyle(
+              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
           centerTitle: false,
+          elevation: 0,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios_new_rounded),
-          ),
-        ),
-        body: Container(
-          margin: EdgeInsets.all(20),
-          child: Center(
-            child: Column(
-              children: [
-                Spacer(flex: 1),
-                Flexible(
-                  flex: 6,
-                  child: SizedBox(
-                    width: screenWidth * 0.8,
-                    child: Image(
-                      image: NetworkImage(
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"),
-                    ),
-                  ),
-                ),
-                Spacer(flex: 3),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Masukkan Email",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                FlexibleTextFormField(
-                  controller: emailController,
-                  labelText: 'example@email.com',
-                  width: screenWidth * 0.8,
-                ),
-                Spacer(flex: 1),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Kata sandi",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                FlexibleTextFormField(
-                  controller: passwordController,
-                  labelText: 'Kata sandi',
-                  width: screenWidth * 0.8,
-                  obscureText: true,
-                ),
-                Spacer(flex: 1),
-                GestureDetector(
-                  onTap: null,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text("Lupa kata sandi?"),
-                  ),
-                ),
-                Spacer(flex: 1),
-                FlexibleElevatedButton(
-                  widget: Text("MASUK",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  width: screenWidth * 0.8,
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NavigationMenu()));
-                  },
-                ),
-                Text("Atau daftar dengan"),
-                FlexibleElevatedButton(
-                  widget: Row(
-                    children: [
-                      Spacer(flex: 10),
-                      FaIcon(FontAwesomeIcons.google),
-                      Spacer(flex: 1),
-                      Text("Google"),
-                      Spacer(flex: 10),
-                    ],
-                  ),
-                  width: screenWidth * 0.8,
-                  onPressed: null,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Belum punya akun?"),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterScreen()),
-                        );
-                      },
-                      child: Text("Daftar sekarang",
-                          style: TextStyle(fontWeight: FontWeight.w500)),
-                    ),
-                  ],
-                ),
-                Spacer(flex: 6),
-              ],
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.black,
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget FlexibleElevatedButton({
-    required Widget widget,
-    required double width,
-    required VoidCallback? onPressed,
-  }) {
-    return Flexible(
-      flex: 3,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  const Image(
+                    height: 128,
+                    width: 128,
+                    image: AssetImage('lib/assets/images/seelearn_logo.png'),
+                  ),
+                  const Align(
+                      alignment: Alignment.centerLeft,
+                      child: SizedBox(
+                        height: 14,
+                        child: Text(
+                          'Email',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        ),
+                      )),
+                  Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFFD9D9D9),
+                    ),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Masukkan email anda";
+                        }
+                        return null;
+                      },
+                      controller: emailController,
+                      maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Masukkan Email",
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      ),
+                    ),
+                  ),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Kata Sandi",
+                      style: TextStyle(fontWeight: FontWeight.bold, height: 3),
+                    ),
+                  ),
+                  Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey.withOpacity(.4),
+                    ),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Masukkan kata sandi anda";
+                        }
+                        return null;
+                      },
+                      controller: passwordController,
+                      maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      obscureText: !isVisible,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Masukkan Kata Sandi",
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 15),
+                        suffixIcon: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isVisible = !isVisible;
+                                  });
+                                },
+                                icon: Icon((!isVisible)
+                                    ? Icons.visibility_off
+                                    : Icons.visibility))),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Lupa kata sandi?",
+                        style: TextStyle(height: 3),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    width: screenWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.yellow,
+                    ),
+                    child: TextButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {}
+                        },
+                        child: const Text(
+                          "MASUK",
+                          style: TextStyle(color: Colors.black),
+                        )),
+                  ),
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Atau masuk dengan",
+                      style: TextStyle(height: 3),
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    width: screenWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.grey,
+                    ),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          FaIcon(FontAwesomeIcons.google),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "Google",
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Belum punya akun?"),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterScreen()),
+                          );
+                        },
+                        child: const Text("Daftar sekarang",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, height: 3)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-        child: Container(
-          width: width,
-          child: Center(child: widget),
-        ),
-        onPressed: onPressed,
-      ),
-    );
-  }
-
-  Widget FlexibleTextFormField({
-    required TextEditingController controller,
-    required double width,
-    bool obscureText = false,
-    required String labelText,
-  }) {
-    return Flexible(
-      flex: 3,
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: labelText,
-        ),
-        obscureText: obscureText,
       ),
     );
   }

@@ -53,16 +53,13 @@ class _NavigationMenuState extends State<NavigationMenu> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-        child: const [
-          HomeScreen(),
-          DownloadScreen(),
-          SearchScreen(),
-          BookmarkScreen(),
-          ProfileScreen()
-        ][currentPageIndex],
-      ),
+      body: const [
+        HomeScreen(),
+        DownloadScreen(),
+        SearchScreen(),
+        BookmarkScreen(),
+        ProfileScreen()
+      ][currentPageIndex],
     );
   }
 }

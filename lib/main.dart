@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'navigation_menu.dart';
+import 'authentication/register_screen.dart';
 import 'authentication/login_screen.dart';
 
 void main() {
@@ -11,11 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoginScreen();
-    // return const MaterialApp(
-    //   title: "Landing Screen",
-    //   home: LoginScreen(),
-    //   debugShowCheckedModeBanner: false,
-    // );
+    return const MaterialApp(
+      title: "Landing Screen",
+      home: LoginScreen(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
