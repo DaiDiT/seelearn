@@ -321,11 +321,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         .convert(utf8
                                             .encode(passwordController.text))
                                         .toString()))
-                                .whenComplete(() => Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const NavigationMenu())));
+                                .whenComplete(() =>
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const NavigationMenu()),
+                                        (route) => false));
                           }
                         },
                         child: const Text(
@@ -372,7 +374,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           Text(
                             "Google",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 12,
+                                color: Colors.black,
+                                height: 3),
                           )
                         ],
                       ),
@@ -407,6 +413,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 height: 3)),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 50,
                   ),
                 ],
               ),

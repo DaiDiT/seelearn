@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/download_screen.dart';
-import 'screens/search_screen.dart';
-import 'screens/bookmark_screen.dart';
 import 'screens/profile_screen.dart';
 
 class NavigationMenu extends StatefulWidget {
@@ -26,38 +24,27 @@ class _NavigationMenuState extends State<NavigationMenu> {
         },
         height: 60,
         elevation: 0,
-        backgroundColor: Colors.lightBlue,
-        indicatorColor: Colors.white,
+        backgroundColor: Colors.white,
+        indicatorColor: const Color(0xffe1e1e1),
         selectedIndex: currentPageIndex,
         destinations: const [
           NavigationDestination(
-              icon: Icon(Icons.home_rounded, color: Colors.white),
-              label: 'Beranda',
-              selectedIcon: Icon(Icons.home_rounded)),
+            icon: Icon(Icons.home_rounded),
+            label: 'Beranda',
+          ),
           NavigationDestination(
-              icon: Icon(Icons.download_rounded, color: Colors.white),
-              label: 'Unduhan',
-              selectedIcon: Icon(Icons.download_rounded)),
+            icon: Icon(Icons.download_rounded),
+            label: 'Unduhan',
+          ),
           NavigationDestination(
-              icon: Icon(Icons.search_rounded, color: Colors.white),
-              label: 'Cari',
-              selectedIcon: Icon(Icons.search_rounded)),
-          NavigationDestination(
-              icon: Icon(Icons.bookmark_rounded, color: Colors.white),
-              label: 'Markah',
-              selectedIcon: Icon(Icons.bookmark_outline_rounded)),
-          NavigationDestination(
-            icon: Icon(Icons.person_rounded, color: Colors.white),
+            icon: Icon(Icons.person_rounded),
             label: 'Profil',
-            selectedIcon: Icon(Icons.person_outline_rounded),
           ),
         ],
       ),
       body: const [
         HomeScreen(),
         DownloadScreen(),
-        SearchScreen(),
-        BookmarkScreen(),
         ProfileScreen()
       ][currentPageIndex],
     );
