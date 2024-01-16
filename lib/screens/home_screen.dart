@@ -39,7 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: const Text(
                     "Daftar/Masuk",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                 )),
           ],
