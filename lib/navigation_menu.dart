@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
+import 'screens/bookmark_screen.dart';
 import 'screens/download_screen.dart';
-import 'screens/profile_screen.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({Key? key}) : super(key: key);
@@ -33,19 +33,19 @@ class _NavigationMenuState extends State<NavigationMenu> {
             label: 'Beranda',
           ),
           NavigationDestination(
-            icon: Icon(Icons.download_rounded),
-            label: 'Unduhan',
+            icon: Icon(Icons.bookmark_rounded),
+            label: 'Markah',
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_rounded),
-            label: 'Profil',
+            icon: Icon(Icons.download_rounded),
+            label: 'Unduhan',
           ),
         ],
       ),
       body: const [
         HomeScreen(),
+        BookmarkScreen(),
         DownloadScreen(),
-        ProfileScreen()
       ][currentPageIndex],
     );
   }

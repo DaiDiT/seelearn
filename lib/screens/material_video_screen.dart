@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/services.dart';
 
-class Video extends StatefulWidget {
-  const Video({Key? key}) : super(key: key);
+class MaterialVideoScreen extends StatefulWidget {
+  const MaterialVideoScreen({Key? key}) : super(key: key);
 
   @override
-  State<Video> createState() => _VideoState();
+  State<MaterialVideoScreen> createState() => _MaterialVideoScreenState();
 }
 
-class _VideoState extends State<Video> {
+class _MaterialVideoScreenState extends State<MaterialVideoScreen> {
   late VideoPlayerController videoPlayerController;
   late CustomVideoPlayerController _customVideoPlayerController;
   Uri videoUrl = Uri.parse(

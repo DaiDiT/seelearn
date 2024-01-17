@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'navigation_menu.dart';
-import 'video.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: "See Learn",
-      home: Video(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
