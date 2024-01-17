@@ -36,14 +36,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                             builder: (context) => const RegisterScreen()));
                   },
-                  child: const Text(
-                    "Daftar/Masuk",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
+                  child: const Row(children: [
+                    Text(
+                      "Masuk",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Icon(
+                      Icons.expand_more_rounded,
+                      color: Colors.black,
+                    )
+                  ]),
                 )),
           ],
           bottom: PreferredSize(
@@ -79,8 +87,35 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Container(
           color: Colors.white.withOpacity(0.800000011920929),
-          child: Column(
+          child: ListView(
             children: [
+              const Padding(
+                  padding: EdgeInsets.only(left: 35, top: 10),
+                  child: Text(
+                    "Selamat Datang!",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  )),
+              Container(
+                height: 128,
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+                padding: const EdgeInsets.only(left: 30),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xFF4E88CA), Color(0x004E88CA)],
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Row(children: [
+                  Text(
+                    "Belajar Tanpa Batas, Meraih Impian dengan Pendidikan Berkualitas",
+                    style: TextStyle(fontSize: 16, overflow: TextOverflow.clip),
+                  ),
+                  Image(image: AssetImage('lib/assets/images/welcome/png'))
+                ]),
+              ),
               Card(
                 margin: const EdgeInsets.symmetric(horizontal: 25),
                 color: Colors.white,
