@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'register_screen.dart';
 import 'package:seelearn/navigation_menu.dart';
 import 'package:seelearn/database/sqlite.dart';
 import 'package:seelearn/models/user.dart';
@@ -83,17 +82,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     image: AssetImage('lib/assets/images/seelearn_logo.png'),
                   ),
                   const SizedBox(height: 10),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Email',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        height: 2,
-                      ),
+                  const Text(
+                    'Email',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      height: 2,
                     ),
                   ),
                   Container(
@@ -127,17 +124,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      'Kata Sandi',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w700,
-                        height: 2,
-                      ),
+                  const Text(
+                    'Kata Sandi',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                      height: 2,
                     ),
                   ),
                   Container(
@@ -181,19 +176,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: const Text(
-                        "Lupa kata sandi?",
-                        style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                            height: 3),
-                      ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Text(
+                      "Lupa kata sandi?",
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                          height: 3),
                     ),
                   ),
                   Container(
@@ -219,50 +212,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         )),
                   ),
-                  const Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Atau masuk dengan",
-                      style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 12,
-                          color: Colors.black,
-                          height: 3),
-                    ),
-                  ),
-                  Container(
-                    height: 50,
-                    width: screenWidth,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: const Color(0xFFD9D9D9),
-                    ),
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            height: 24,
-                            width: 24,
-                            image:
-                                AssetImage('lib/assets/images/google_logo.png'),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Google",
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16,
-                                color: Colors.black,
-                                height: 3),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -276,13 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 10,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RegisterScreen()),
-                          );
-                        },
+                        onTap: () {},
                         child: const Text("Daftar sekarang",
                             style: TextStyle(
                                 fontFamily: 'Roboto',
