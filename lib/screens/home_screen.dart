@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seelearn/authentication/login_screen.dart';
 import 'subject_detail_screen.dart';
+import 'package:connectivity/connectivity.dart';
 
 const List<String> list = <String>[
   'Kelas 1',
@@ -20,12 +21,34 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String dropdownValue = list.first;
+  bool isConnected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkConnectivity().then((result) {
+      setState(() {
+        isConnected = result;
+      });
+    });
+  }
+
+  Future<bool> checkConnectivity() async {
+    var result = await (Connectivity().checkConnectivity());
+
+    return (result != ConnectivityResult.none);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 30, left: 8),
+            child: Icon(Icons.circle,
+                color: isConnected ? Colors.green : Colors.red, size: 16),
+          ),
           backgroundColor: const Color(0xFFFFD700),
           actions: [
             Padding(
@@ -106,85 +129,120 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   )),
-              Container(
-                height: 128,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
-                padding: const EdgeInsets.only(left: 30),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Color(0xFF4E88CA), Color(0x004E88CA)],
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 165,
-                        child: Text(
-                            "Belajar Tanpa Batas, Meraih Impian dengan Pendidikan Berkualitas",
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16,
-                                color: Colors.black)),
+              Stack(
+                children: [
+                  Container(
+                    height: 128,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 16),
+                    padding: const EdgeInsets.only(left: 30),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Color(0xFF4E88CA), Color(0x004E88CA)],
                       ),
-                      Image(
-                          width: 80,
-                          height: 128,
-                          image: AssetImage('lib/assets/images/welcome.png'))
-                    ]),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 165,
+                            child: Text(
+                                "Belajar Tanpa Batas, Meraih Impian dengan Pendidikan Berkualitas",
+                                style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 16,
+                                    color: Colors.black)),
+                          ),
+                          SizedBox(
+                            width: 1,
+                          )
+                        ]),
+                  ),
+                  Container(
+                      height: 128,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 23, vertical: 16),
+                      child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 1,
+                            ),
+                            Image(
+                                width: 80,
+                                height: 128,
+                                image:
+                                    AssetImage('lib/assets/images/welcome.png'))
+                          ])),
+                ],
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 25),
-                padding: const EdgeInsets.only(right: 18, left: 18, bottom: 18),
+                padding: const EdgeInsets.only(bottom: 18),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(children: [
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text("Kategori",
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 12,
-                                color: Colors.black)),
-                        DropdownButton<String>(
-                          value: dropdownValue,
-                          icon: const Icon(
-                            Icons.expand_more_rounded,
-                            size: 16,
-                          ),
-                          style: const TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 12,
-                            color: Colors.black,
-                          ),
-                          onChanged: (String? value) {
-                            setState(() {
-                              dropdownValue = value!;
-                            });
-                          },
-                          items: list
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Kategori",
+                              style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 12,
-                                  color: Colors.black,
+                                  color: Colors.black)),
+                          Container(
+                              // margin: const EdgeInsets.symmetric(vertical: 11),
+                              // padding:
+                              //     const EdgeInsets.symmetric(horizontal: 11),
+                              // decoration: BoxDecoration(
+                              //   color: const Color(0xFFE0DAD8),
+                              //   borderRadius: BorderRadius.circular(10),
+                              // ),
+                              child: DropdownButton<String>(
+                            value: dropdownValue,
+                            icon: const Icon(
+                              Icons.expand_more_rounded,
+                              size: 16,
+                            ),
+                            menuMaxHeight: 200,
+                            underline: const SizedBox(),
+                            borderRadius: BorderRadius.circular(10),
+                            style: const TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 12,
+                              color: Colors.black,
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                dropdownValue = value!;
+                              });
+                            },
+                            items: list
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: SizedBox(
+                                  child: Text(
+                                    value,
+                                    style: const TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            );
-                          }).toList(),
-                        )
-                      ]),
+                              );
+                            }).toList(),
+                          )),
+                        ]),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
