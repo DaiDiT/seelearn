@@ -3,7 +3,10 @@ import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/services.dart';
 
 class MaterialVideoScreen extends StatefulWidget {
-  const MaterialVideoScreen({Key? key}) : super(key: key);
+  final String videoTitle, videoSource;
+  const MaterialVideoScreen(
+      {Key? key, required this.videoTitle, required this.videoSource})
+      : super(key: key);
 
   @override
   State<MaterialVideoScreen> createState() => _MaterialVideoScreenState();
@@ -12,13 +15,13 @@ class MaterialVideoScreen extends StatefulWidget {
 class _MaterialVideoScreenState extends State<MaterialVideoScreen> {
   late VideoPlayerController videoPlayerController;
   late CustomVideoPlayerController _customVideoPlayerController;
-  Uri videoUrl = Uri.parse(
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4");
+
   @override
   void initState() {
     super.initState();
-    videoPlayerController = VideoPlayerController.networkUrl(videoUrl)
-      ..initialize().then((value) => setState(() {}));
+    videoPlayerController =
+        VideoPlayerController.networkUrl(Uri.parse(widget.videoSource))
+          ..initialize().then((value) => setState(() {}));
     _customVideoPlayerController = CustomVideoPlayerController(
         context: context,
         videoPlayerController: videoPlayerController,
@@ -83,9 +86,9 @@ class _MaterialVideoScreenState extends State<MaterialVideoScreen> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "Judul Materi Ya Ini",
-                      style: TextStyle(
+                    Text(
+                      widget.videoTitle,
+                      style: const TextStyle(
                           fontSize: 12,
                           fontFamily: 'Roboto',
                           color: Colors.black),
@@ -96,7 +99,6 @@ class _MaterialVideoScreenState extends State<MaterialVideoScreen> {
             CustomVideoPlayer(
               customVideoPlayerController: _customVideoPlayerController,
             ),
-            Text("Jirlah")
           ]),
         ),
       ),

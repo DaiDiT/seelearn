@@ -50,61 +50,99 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
         child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             children: [
-              SizedBox(
-                height: 12,
-              ),
-              Container(
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MaterialVideoScreen()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: ShapeDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    'lib/assets/images/google_logo.png'),
-                                fit: BoxFit.fill,
-                              ),
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          const Text(
-                            "Judul Materi Ya Ini",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: 'Roboto',
-                                color: Colors.black),
-                          ),
-                          Spacer(),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.bookmark_add_rounded)),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.download)),
-                        ]),
-                  ),
-                ),
-              ),
+              buildMaterialVideoButton(
+                  iconAsset: "1",
+                  materialName: "Bilangan 1 sampai 10",
+                  videoAsset:
+                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+              buildMaterialVideoButton(
+                  iconAsset: "2",
+                  materialName: "Menyusun Bilangan",
+                  videoAsset:
+                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+              buildMaterialVideoButton(
+                  iconAsset: "3",
+                  materialName: "Penjumlahan",
+                  videoAsset:
+                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+              buildMaterialVideoButton(
+                  iconAsset: "4",
+                  materialName: "Bangun Datar",
+                  videoAsset:
+                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+              buildMaterialVideoButton(
+                  iconAsset: "5",
+                  materialName: "Bilangan lebih dari 10",
+                  videoAsset:
+                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+              buildMaterialVideoButton(
+                  iconAsset: "6",
+                  materialName: "Pengurangan",
+                  videoAsset:
+                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
             ]),
+      ),
+    );
+  }
+
+  Widget buildMaterialVideoButton({
+    required String iconAsset,
+    required String materialName,
+    required String videoAsset,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(top: 12),
+      height: 55,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Colors.white,
+      ),
+      child: TextButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MaterialVideoScreen(
+                      videoTitle: materialName, videoSource: videoAsset)));
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: ShapeDecoration(
+                image: DecorationImage(
+                  image: AssetImage('lib/assets/icons/$iconAsset.png'),
+                  fit: BoxFit.fill,
+                ),
+                shape: const OvalBorder(),
+              ),
+            ),
+            const SizedBox(
+              width: 12,
+            ),
+            Text(
+              materialName,
+              style: const TextStyle(
+                  fontSize: 12, fontFamily: 'Roboto', color: Colors.black),
+            ),
+            const Spacer(),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.bookmark_add_rounded,
+                  color: Colors.black,
+                )),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.download_for_offline_outlined,
+                  color: Colors.black,
+                )),
+          ]),
+        ),
       ),
     );
   }
