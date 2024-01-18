@@ -28,10 +28,7 @@ class _MaterialVideoScreenState extends State<MaterialVideoScreen> {
         customVideoPlayerSettings: const CustomVideoPlayerSettings(
           autoFadeOutControls: true,
           durationAfterControlsFadeOut: Duration(seconds: 2),
-          deviceOrientationsAfterFullscreen: [
-            DeviceOrientation.landscapeRight,
-            DeviceOrientation.landscapeLeft
-          ],
+          deviceOrientationsAfterFullscreen: [DeviceOrientation.portraitUp],
           playButton: Icon(
             Icons.play_circle,
             color: Colors.white,

@@ -54,32 +54,32 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
                   iconAsset: "1",
                   materialName: "Bilangan 1 sampai 10",
                   videoAsset:
-                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+                      "https://peopconn.000webhostapp.com/video_contoh.mp4"),
               buildMaterialVideoButton(
                   iconAsset: "2",
                   materialName: "Menyusun Bilangan",
                   videoAsset:
-                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+                      "https://peopconn.000webhostapp.com/video_contoh.mp4"),
               buildMaterialVideoButton(
                   iconAsset: "3",
                   materialName: "Penjumlahan",
                   videoAsset:
-                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+                      "https://peopconn.000webhostapp.com/video_contoh.mp4"),
               buildMaterialVideoButton(
                   iconAsset: "4",
                   materialName: "Bangun Datar",
                   videoAsset:
-                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+                      "https://peopconn.000webhostapp.com/video_contoh.mp4"),
               buildMaterialVideoButton(
                   iconAsset: "5",
                   materialName: "Bilangan lebih dari 10",
                   videoAsset:
-                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+                      "https://peopconn.000webhostapp.com/video_contoh.mp4"),
               buildMaterialVideoButton(
                   iconAsset: "6",
                   materialName: "Pengurangan",
                   videoAsset:
-                      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"),
+                      "https://peopconn.000webhostapp.com/video_contoh.mp4"),
             ]),
       ),
     );

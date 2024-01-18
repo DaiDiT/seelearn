@@ -181,64 +181,68 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 25),
-                padding: const EdgeInsets.only(right: 18, left: 18, bottom: 18),
+                padding: const EdgeInsets.only(bottom: 18),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(children: [
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text("Kategori",
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 12,
-                                color: Colors.black)),
-                        Container(
-                            margin: const EdgeInsets.symmetric(vertical: 11),
-                            padding: const EdgeInsets.symmetric(horizontal: 11),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFE0DAD8),
-                              borderRadius: BorderRadius.circular(10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Kategori",
+                              style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 12,
+                                  color: Colors.black)),
+                          Container(
+                              // margin: const EdgeInsets.symmetric(vertical: 11),
+                              // padding:
+                              //     const EdgeInsets.symmetric(horizontal: 11),
+                              // decoration: BoxDecoration(
+                              //   color: const Color(0xFFE0DAD8),
+                              //   borderRadius: BorderRadius.circular(10),
+                              // ),
+                              child: DropdownButton<String>(
+                            value: dropdownValue,
+                            icon: const Icon(
+                              Icons.expand_more_rounded,
+                              size: 16,
                             ),
-                            child: DropdownButton<String>(
-                              value: dropdownValue,
-                              icon: const Icon(
-                                Icons.expand_more_rounded,
-                                size: 16,
-                              ),
-                              menuMaxHeight: 200,
-                              underline: const SizedBox(),
-                              borderRadius: BorderRadius.circular(10),
-                              style: const TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 12,
-                                color: Colors.black,
-                              ),
-                              onChanged: (String? value) {
-                                setState(() {
-                                  dropdownValue = value!;
-                                });
-                              },
-                              items: list.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: SizedBox(
-                                    child: Text(
-                                      value,
-                                      style: const TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                      ),
+                            menuMaxHeight: 200,
+                            underline: const SizedBox(),
+                            borderRadius: BorderRadius.circular(10),
+                            style: const TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 12,
+                              color: Colors.black,
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                dropdownValue = value!;
+                              });
+                            },
+                            items: list
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: SizedBox(
+                                  child: Text(
+                                    value,
+                                    style: const TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 12,
+                                      color: Colors.black,
                                     ),
                                   ),
-                                );
-                              }).toList(),
-                            )),
-                      ]),
+                                ),
+                              );
+                            }).toList(),
+                          )),
+                        ]),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
